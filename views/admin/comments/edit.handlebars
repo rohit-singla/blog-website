@@ -1,0 +1,55 @@
+<div class="container">
+
+    <h3 class="alert alert-dark p-3 text-dark text-center">All Comments </h3>
+    
+    <div class="row">
+        <div class="container">
+            <div class="col-md-10">
+                <table class="table table-bordered text-center text-white">
+                    <thead class="bg-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Publisher</th>
+                            <th>Approve Comments</th>
+                            <th>Date</th>
+                            <th>Comment Body</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="text-dark">
+                        {{#each comments}}
+                        <tr>
+                            <td>{{id}}</td>
+                            <td style="width: auto;">{{user.firstName}} {{user.lastName}}</td>
+                            <td><input type="checkbox" name="approveComments" class="approveComments"
+                                    data-buttonid="{{id}}" {{#if commentIsApproved}}checked="checked" {{/if}} /></td>
+                            <td>{{date}}</td>
+                            <td>{{body}}</td>
+                            <td class="d-flex justify-content-center">
+                                <a href="/admin/comment/edit/{{_id}}" class="btn btn-sm btn-warning mr-2" role="button">Edit</a>
+                                <form action="/admin/comment/delete/{{_id}}?newMethod=DELETE" method="post">
+                                    <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+
+                        {{/each}}
+                    </tbody>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row p-4">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="title">Comment</label>
+                <input type="text" class="form-control" id="comment-body" name="title" value="{{comment.body}}">
+                <input type="hidden" class="form-control" id="comment-id" name="id" value="{{comment._id}}">
+            </div>
+            <button class="btn btn-outline-warning btn-lg" id="update-comment-button">Update Comment</button>
+        </div>
+    </div>
+</div>
